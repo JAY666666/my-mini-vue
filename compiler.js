@@ -46,6 +46,13 @@ class Compiler {
           attrName = attrName.substring(2); //获取v-xxx 指令名
           let key = attr.value; //获取v-xxx = value vlue名
           node.value = this.vm.$data[key];
+          if (attrName == "model") {
+            // 双向绑定
+            node.addEventListener("input", () => {
+              this.vm.$data[key] = node.value;
+              console.log("model值变化", this.vm.$data[key]);
+            });
+          }
           new Watcher(this.vm.$data, key, (newValue) => {
             node.value = newValue;
           });
