@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my-mini-vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>姓名: {{ name }}</div>
+      <div>
+        <span onclick="handleAgeReduce()">(-)</span>
+        <span>年龄: </span>
+        <span>{{ age }}</span>
+        <span onclick="handleAgeAdd()">(+)</span>
+      </div>
+      <input v-model="money" />
+    </div>
+    <script src="./dep.js"></script>
+    <script src="./observer.js"></script>
+    <script src="./watcher.js"></script>
+    <script src="./compiler.js"></script>
+    <script src="./vue.js"></script>
+    <script>
+      let vm = new Vue({
+        el: document.getElementById("app"),
+        data: {
+          name: "wxl",
+          age: 18,
+          money: 500000,
+        },
+      });
+      function handleAgeAdd() {
+        vm.$data.age++;
+      }
+      function handleAgeReduce() {
+        vm.$data.age--;
+      }
+    </script>
+  </body>
+</html>
