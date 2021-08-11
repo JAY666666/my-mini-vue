@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vdom</title>
+  </head>
+  <body>
+    <div id="app">
+      <div onclick="addSong()">新增歌曲</div>
+      <div onclick="editSong()">变化歌曲</div>
+    </div>
+    <script src="./diff.js"></script>
+    <script src="./patch.js"></script>
+    <script src="./vdom.js"></script>
+    <script>
+      let vDom = createElement("ul", { class: "father" }, [
+        createElement("li", { class: "son" }, ["一路向北"]),
+        createElement("li", { class: "son" }, ["园游会"]),
+        createElement("li", { class: "son" }, ["你听得到"]),
+      ]);
+      let vDom2 = createElement("ul", { class: "father2" }, [
+        createElement("li", { class: "son2" }, ["青花瓷"]),
+        createElement("li", { class: "son2" }, ["七里香"]),
+        createElement("li", { class: "son2" }, ["东风破"]),
+      ]);
+      let target = document.getElementById("app");
+      let el = render(vDom);
+      function addSong() {
+        renderDom(target, el);
+      }
+      function editSong() {
+        let patches = diff(vDom, vDom2);
+        patch(el, patches);
+      }
+    </script>
+  </body>
+</html>

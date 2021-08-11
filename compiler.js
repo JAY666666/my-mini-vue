@@ -24,7 +24,6 @@ class Compiler {
 
   // 解析文本节点 => Element或者Attr中实际的文字
   compileTextNode(node) {
-    console.log("文本节点", node.textContent);
     let reg = /\{\{(.+?)\}\}/;
     let value = node.textContent;
     if (reg.test(value)) {
@@ -38,7 +37,6 @@ class Compiler {
 
   // 解析元素节点 => 一个元素节点，例如<p>和<div>
   compileElementNode(node) {
-    console.log("元素节点", node);
     if (node.attributes.length) {
       Array.from(node.attributes).forEach((attr) => {
         let attrName = attr.name;
